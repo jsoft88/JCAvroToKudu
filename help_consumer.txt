@@ -1,0 +1,26 @@
+/**
+ *
+ * @author Jorge Cespedes
+ * 
+ * Main class to launch consumers. Its purpose is to consume json messages from
+ * kafka partitions and insert them into a kudu table.
+ * 
+ * Usage StartConsumers maxNumberOfConsumers consumerGroup topic consumerPort \
+ *      zookeeper:port commaSeparatedBrokers maxRetriesOnEmptyPartition kuduTableName \
+ *      masterAddressesCommaSeparated
+ * 
+ * maxNumberOfConsumers sets the number of consumers to use, this would normally
+ * match the number of partitions available under a topic. 
+ * ConsumerGroup is the name of the consumer group, could be anything.
+ * Topic, the topic containing the partitions from which messages are to be read
+ * ConsumerPort, port number of consumers
+ * Zookeeper:port, zookeeper host address followed by colon and port number
+ * CommaSeparatedBrokers: brokers addresses (without port number). Please list all
+ * of the available brokers and DO NOT INCLUDE SPACES.
+ * MaxRetriesOnEmptyPartition, how many times would a consumer retry to obtain 
+ * a message from a partition when none is available.
+ * KuduTableName, name of the kudu table where records will be inserted.
+ * masterAddressesCommaSeparated, comma-separated kudu master addresse. DO NOT 
+ * INCLUDE SPACES.
+ * 
+ */

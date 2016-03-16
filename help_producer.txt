@@ -1,0 +1,30 @@
+/**
+ *
+ * @author Jorge Cespedes
+ * 
+ * Main class to start producers. The producers can read each avro data file 
+ * in chunks, that is, each producer will be taking a piece of any given file.
+ * The size of the chunk each producer will have to process is controlled by
+ * the linesToReadPerWorker argument and the number of producers/workers per file
+ * is controlled by maxNumOfWorkersPerFile.
+ * 
+ * This class expects each line from avro file to be encoded as a json string, 
+ * therefore it allows to implement a partitioner based on the value of some 
+ * json key. The key to be searched inside a json-encoded avro record is indicated
+ * by fieldToUseAsPartition.
+ * 
+ * Provide TWO(2) brokers to be queried at the very beginning. Any two brokers in
+ * the cluster. Finally, provide the fully qualified name of the class to be used
+ * to tell which partition the current message belongs to. The key to be used is
+ * the one provided in fieldToUseAsPartition.
+ * 
+ * 
+ * Usage: StartProducers \
+ * numberOfFiles fileInHdfs1,fileInHdfs2,fileInHdfs3,...,fileInHdfsNumOfFiles \
+ * fieldToUseAsPartition linesToReadPerWorker maxNumOfWorkersPerFile \
+ * broker1,broker2 FQCNOfPartitioner topic
+ * 
+ * Example: StartProducers 1 hdfs://name.node:8022/user/hive/warehouse/file1.avro \
+ * JSON_KEY 100000 100 host1:9092,host2:9092 org.jc.avrotokudu.producer.DataPartitioner \
+ * myTopic
+ */
